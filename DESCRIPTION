@@ -1,0 +1,19 @@
+Package: popr
+Type: Package
+Title: Analysis routines for population data with geographical location information
+Version: 0.0.1
+Date: 2016-06-14
+Author: Your Name
+Maintainer: Your Name <your@email.com>
+Description: One paragraph description of what the package does as one or more
+    full sentences.
+License: GPL (>= 2)
+Imports:
+    Rcpp (>= 0.12.5),
+    RcppProgress (>= 0.2.1),
+    igraph (>= 1.0.1),
+    tibble (>= 1.1)
+LinkingTo: Rcpp, RcppProgress, igraph
+SystemRequirements: C++11
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1
