@@ -12,14 +12,23 @@ build_pedigrees <- function(population, progress = TRUE) {
     .Call('popr_build_pedigrees', PACKAGE = 'popr', population, progress)
 }
 
+#' Build kd-tree with all individuals from population
+#' 
+#' @export
 build_kdtree_from_population <- function(population, max_leaf_size) {
     .Call('popr_build_kdtree_from_population', PACKAGE = 'popr', population, max_leaf_size)
 }
 
+#' Build kd-tree with all individuals from pedigree
+#' 
+#' @export
 build_kdtree_from_pedigree <- function(pedigree, max_leaf_size) {
     .Call('popr_build_kdtree_from_pedigree', PACKAGE = 'popr', pedigree, max_leaf_size)
 }
 
+#' Build kd-tree from a list of pids
+#' 
+#' @export
 build_kdtree_from_pids <- function(pids, population, max_leaf_size) {
     .Call('popr_build_kdtree_from_pids', PACKAGE = 'popr', pids, population, max_leaf_size)
 }

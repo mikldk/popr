@@ -17,6 +17,9 @@ SearchDataStructure* build_kdtree_from_pointcloud(PointCloud<double>* pointcloud
   return search_tree;
 }
 
+//' Build kd-tree with all individuals from population
+//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_population(Rcpp::XPtr<Population> population, int max_leaf_size) {
   SearchDataStructure* search_tree = build_kdtree_from_pointcloud(population, max_leaf_size);
@@ -26,6 +29,9 @@ Rcpp::XPtr<SearchDataStructure> build_kdtree_from_population(Rcpp::XPtr<Populati
   return res;
 }
 
+//' Build kd-tree with all individuals from pedigree
+//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pedigree(Rcpp::XPtr<Pedigree> pedigree, int max_leaf_size) {
   SearchDataStructure* search_tree = build_kdtree_from_pointcloud(pedigree, max_leaf_size);
@@ -36,6 +42,9 @@ Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pedigree(Rcpp::XPtr<Pedigree> 
 }
 
 
+//' Build kd-tree from a list of pids
+//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size) {
   Population* pop = population;
