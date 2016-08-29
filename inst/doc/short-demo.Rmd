@@ -1,0 +1,140 @@
+---
+title: "Short demonstration"
+author: "Mikkel Meyer Andersen"
+output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Short demonstration}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Example without location information
+
+## Preparation
+
+We use the `sample.ped` data from the `kinship2` package:
+```{r}
+data("sample.ped", package = "kinship2")
+head(sample.ped)
+```
+
+And load helper packages:
+```{r}
+library(dplyr)
+library(tibble)
+```
+
+
+Then we load the `popr` package:
+```{r}
+library(popr)
+```
+
+## Using `popr`
+
+First, a population is build:
+```{r}
+pop <- with(sample.ped, load_individuals(pid = id, 
+                                         is_male = (sex == 1), 
+                                         pid_mom = mother, 
+                                         pid_dad = father,
+                                         progress = FALSE))
+```
+
+We check number of children:
+```{r}
+children_count <- as_data_frame(get_number_of_children(pop, progress = FALSE))
+children_count %>% filter(boys_n > 0 | girls_n > 0)
+```
+
+We then build pedigrees:
+```{r}
+peds <- build_pedigrees(pop, progress = FALSE)
+peds
+```
+
+```{r}
+lapply(1L:pedigrees_count(peds), function(i) pedigree_size(peds[[i]]))
+```
+
+We can also get pedigree id's:
+```{r}
+ped_ids <- get_pedigree_id_from_pid(population = pop, pids = sample.ped$id)
+table(ped_ids, sample.ped$ped)
+```
+
+We see that an individual is in its own pedigree as data does not suggest that it is linked to other individuals:
+```{r}
+peds[[3L]]
+pid <- get_pids_in_pedigree(peds[[3L]])
+sample.ped %>% filter(id == pid | father == pid | mother == pid)
+```
+
+Hence, be aware the the pedigrees constructed by `build_pedigrees` is (on purpose) only using the data provided.
+
+We can inspect pedigrees (as induced by data):
+
+```{r}
+peds[[2L]]
+pids <- get_pids_in_pedigree(peds[[2L]])
+pids
+sample.ped %>% filter(id %in% pids | mother %in% pids | father %in% pids)
+children_count %>% filter(pid %in% pids)
+```
+
+We can also plot:
+```{r}
+plot(peds[[2L]])
+g <- pedigree_as_igraph(peds[[2L]])
+g
+plot(g)
+get_pedigree_as_graph(peds[[2L]])
+```
+
+
+# Example with location information
+
+We add artificial [ETRS89](https://en.wikipedia.org/wiki/European_Terrestrial_Reference_System_1989) east and north coordinates (or a similar coordinate system). Remember, distances are Euclidean distances were ETRS89 east (`etrs89e`) and north (`etrs89n`) are regarded as $x$ and $y$ coordinates. Also, recall that the unit of the coordinates determine the unit of the distances.
+
+```{r}
+set.seed(1) # For reproducibility
+sample.ped.coords <- as_data_frame(cbind(sample.ped, tibble(etrs89e = runif(nrow(sample.ped), 250, 650), etrs89n = runif(nrow(sample.ped), 650, 750))))
+sample.ped.coords
+```
+
+First, a population is build:
+```{r}
+pop_coord <- with(sample.ped.coords, load_individuals(pid = id, 
+                                                      is_male = (sex == 1), 
+                                                      pid_mom = mother, 
+                                                      pid_dad = father,
+                                                      etrs89e = etrs89e,
+                                                      etrs89n = etrs89n,
+                                                      progress = FALSE))
+```
+
+We then build pedigrees:
+```{r}
+peds_coord <- build_pedigrees(pop_coord, progress = FALSE)
+```
+
+Now, prepare a population wide search tree (only for counting number of individuals):
+```{r}
+kdtree <- build_kdtree_from_population(pop_coord, max_leaf_size = 10)
+```
+
+Perform radius search of first individual:
+```{r}
+d <- meioses_distribution(population = pop_coord, search_tree_unrelated = kdtree,
+                          max_leaf_size_pedigree = 10, 
+                          pids = sample.ped.coords$id[1L], 
+                          radii = c(100, 50, 100))
+```
+
+```{r}
+d
+```
+
+
+
