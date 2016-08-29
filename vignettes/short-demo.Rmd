@@ -26,8 +26,7 @@ library(tibble)
 
 Then we load the `popr` package:
 ```{r}
-#library(popr)
-devtools::load_all('../')
+library(popr)
 ```
 
 ## Using `popr`

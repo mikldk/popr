@@ -2,17 +2,61 @@
 % Please edit documentation in R/kd.R
 \name{meioses_distribution_for_tree_pedigrees}
 \alias{meioses_distribution_for_tree_pedigrees}
-\title{Get distribution of number of meioses within a given radius}
+\title{#' Get distribution of number of meioses within a given radius
+#' 
+#' For each individual (pid) in pids, a search is performed for all individuals in the population within a certain radius. 
+#' All the individuals within the radius are classified as either related or unrelated 
+#' (depending on whether they belong to the same pedigree or not). If they do belong to the same pedigree,
+#' the number of meioses are found.
+#'  
+#' Pedigree information is linked to the individuals in the population. All pedigrees must be trees (FIXME).
+#' 
+#' @param population A collection of individuals (\code{"popr_population"})
+#' @param pids Vector of pids to get meioses_distributions for
+#' @param radii Vector of radii (radiuses) to search within [km]
+#' @param confirm_all_pedigrees_are_trees Set to TRUE to confirm that all pedigrees are tree (this is the caller's responsibility to ensure that as it would be too time consuming to check this requirement in this function)
+#' 
+#' @return A tibble with meioses distribution information
+#' 
+#' @export
+meioses_distribution_for_tree_pedigrees <- function(population, pids, radii, confirm_all_pedigrees_are_trees = FALSE) {
+  if (!is(population, "popr_population")) stop("population must be a popr_population object")
+  
+  if (length(confirm_all_pedigrees_are_trees) != 1L || !is.logical(confirm_all_pedigrees_are_trees) || confirm_all_pedigrees_are_trees == FALSE) {
+    stop("You have not confirmed that all the pedigrees are trees (fulfilled e.g. for a population with only male lineages)")
+  }
+  
+  radii <- sort(unique(radii), decreasing = TRUE)
+  m <- analyse_meioses_internal_tree(population, pids, radii)
+  
+  if (nrow(m) == 1L && ncol(m) == 1L && is.na(m[1L, 1L])) {
+    stop("Function was aborted") # FIXME: error class instead?
+  }
+  
+  d <- tibble::tibble(pid = m[, 1L], Radius = radii[m[, 2L]], Distance = m[, 3L], count = m[, 4L])
+  
+  d$Type <- "Related"
+  d$Type[d$Distance == -1L] <- "Unrelated"
+  d$Type[d$Distance != -1L] <- "Related"
+  d$Distance[d$Distance == -1L] <- NA
+  
+  return(d)
+}}
 \usage{
-meioses_distribution_for_tree_pedigrees(population, pids, radii,
+meioses_distribution_for_tree_pedigrees(population, search_tree_unrelated,
+  max_leaf_size_pedigree = 10, pids, radii,
   confirm_all_pedigrees_are_trees = FALSE)
 }
 \arguments{
-\item{population}{A collection of individuals (\code{"popr_population"})}
+\item{population}{A collection of individuals (\code{popr_population})}
 
-\item{pids}{Vector of pids to get meioses_distributions for}
+\item{search_tree_unrelated}{A search kd-tree when counting unrelated individuals (typically based on \code{population}), created with e.g. \link{\code{build_kdtree_from_population}} or \link{\code{build_kdtree_from_pids}}}
 
-\item{radii}{Vector of radii (radiuses) to search within}
+\item{max_leaf_size_pedigree}{A parameter for building kd-trees for the pedigrees that he individuals with pid in \code{pids} belongs to}
+
+\item{pids}{Vector of pids to get meioses_distributions for (must be individuals in \code{population})}
+
+\item{radii}{Vector of radii (radiuses) to search within [km]}
 
 \item{confirm_all_pedigrees_are_trees}{Set to TRUE to confirm that all pedigrees are tree (this is the caller's responsibility to ensure that as it would be too time consuming to check this requirement in this function)}
 }
@@ -20,11 +64,16 @@ meioses_distribution_for_tree_pedigrees(population, pids, radii,
 A tibble with meioses distribution information
 }
 \description{
-For each individual (pid) in pids, a search is performed for all individuals in the population within a certain radius. 
-All the individuals within the radius are classified as either related or unrelated 
+Get distribution of number of meioses within a given radius. 
+The Euclidian distance is used based on ETRS89 coordinates due to speed. 
+Hence, be sure that this is an acceptable error in comparison to e.g. great-circle distance).
+}
+\details{
+For each individual (pid) in pids, a search is performed for all individuals in the population within a certain radius.
+All the individuals within the radius are classified as either related or unrelated
 (depending on whether they belong to the same pedigree or not). If they do belong to the same pedigree,
 the number of meioses are found.
- 
+
 Pedigree information is linked to the individuals in the population. All pedigrees must be trees (FIXME).
 }
 
