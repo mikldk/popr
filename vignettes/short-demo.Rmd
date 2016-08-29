@@ -1,9 +1,11 @@
 ---
 title: "Short demonstration"
+author: "Mikkel Meyer Andersen"
 output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Short demonstration}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -135,4 +137,4 @@ d
 ```
 
 
- 
+

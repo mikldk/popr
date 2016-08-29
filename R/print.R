@@ -1,3 +1,4 @@
+#' @export
 print.popr_population_abort <-
   function(x, ...) {
     if (!is(x, "popr_population_abort")) stop("x must be a popr_population_abort object")
@@ -5,6 +6,7 @@ print.popr_population_abort <-
     return(invisible(NULL))
   }
 
+#' @export
 print.popr_population <-
   function(x, ...) {
     if (!is(x, "popr_population")) stop("x must be a popr_population object")
@@ -14,6 +16,7 @@ print.popr_population <-
     return(invisible(NULL))
   }
 
+#' @export
 print.popr_pedigreelist <-
   function(x, ...) {
     if (!is(x, "popr_pedigreelist")) stop("x must be a popr_pedigreelist object")
@@ -37,8 +40,7 @@ print.popr_pedigreelist <-
   }
 
   
-#methods(`[[`)
-#getAnywhere(`[[.data.frame`)
+#' @export
 `[[.popr_pedigreelist` <- function(x, ...) {
   i <- ..1
   if (length(i) != 1L || !is.integer(i) || i[1L] <= 0L || i > pedigrees_count(x)) {
@@ -49,6 +51,7 @@ print.popr_pedigreelist <-
   return(p)
 }
 
+#' @export
 `[[.popr_population` <- function(x, ...) {
   pid <- ..1
   if (length(pid) != 1L || !is.integer(pid)) {
@@ -59,6 +62,7 @@ print.popr_pedigreelist <-
   return(p)
 }
 
+#' @export
 print.popr_pedigree <-
   function(x, ...) {
     if (!is(x, "popr_pedigree")) stop("x must be a popr_pedigree object")
@@ -68,7 +72,7 @@ print.popr_pedigree <-
     return(invisible(NULL))
   }
 
-
+#' @export
 pedigree_as_igraph <-
   function(x, ...) {
     if (!is(x, "popr_pedigree")) stop("x must be a popr_pedigree object")
@@ -82,7 +86,8 @@ pedigree_as_igraph <-
 
     return(g)
   }
-  
+
+#' @export  
 plot.popr_pedigree <-
   function(x, ...) {
     if (!is(x, "popr_pedigree")) stop("x must be a popr_pedigree object")
