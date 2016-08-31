@@ -159,6 +159,20 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// get_male_children_pids
+List get_male_children_pids(Rcpp::XPtr<Population> population, IntegerVector pids, IntegerMatrix pid_birthyear, bool progress);
+RcppExport SEXP popr_get_male_children_pids(SEXP populationSEXP, SEXP pidsSEXP, SEXP pid_birthyearSEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Population> >::type population(populationSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type pids(pidsSEXP);
+    Rcpp::traits::input_parameter< IntegerMatrix >::type pid_birthyear(pid_birthyearSEXP);
+    Rcpp::traits::input_parameter< bool >::type progress(progressSEXP);
+    __result = Rcpp::wrap(get_male_children_pids(population, pids, pid_birthyear, progress));
+    return __result;
+END_RCPP
+}
 // popr_test
 void popr_test();
 RcppExport SEXP popr_popr_test() {

@@ -64,6 +64,77 @@ IntegerMatrix get_number_of_children(Rcpp::XPtr<Population> population, bool pro
   return children_count;
 }
 
+//' Get ages children
+//'
+//' @param pid_birthyear Matrix where 1st column is pid and 2nd column is birthyear
+//'  
+//' @export
+// [[Rcpp::export]]
+List get_male_children_pids_birthyear(Rcpp::XPtr<Population> population, IntegerVector pids, IntegerMatrix pid_birthyear, bool progress = true) {
+  size_t N = pids.size();
+  List children_pids(N);
+  Progress p(N, progress);
+  
+  // Fill pid => birthyear mapping
+  std::unordered_map<int, int> pid_birthyear_table;
+  for (size_t i = 0; i < pid_birthyear.nrow(); ++i) {
+    pid_birthyear_table[pid_birthyear(i, 0)] = pid_birthyear(i, 1);
+  }
+  
+  // get children
+  
+  for (size_t i = 0; i < N; ++i) {
+    int pid = pids[i];
+
+    std::unordered_map<int, int>::const_iterator got = pid_birthyear_table.find(pid);
+    if (got == pid_birthyear_table.end()) {
+      Rcpp::Rcerr << "birthyear for individual with pid = " << pid << " not found!" << std::endl;
+      Rcpp::stop("birthyear for individual not found");
+    }
+    int birthyear = got->second;
+        
+    Individual* indv = population->get_individual(pid);
+    std::vector<Individual*>* children = indv->get_children();
+    
+    IntegerVector c_pids;
+    IntegerVector c_birthyears;
+    
+    for (auto &child : (*children)) {
+      if (child->get_is_male()) {
+        int child_pid = child->get_pid();
+        
+        std::unordered_map<int, int>::const_iterator got_child = pid_birthyear_table.find(child_pid);
+        if (got_child == pid_birthyear_table.end()) {
+          Rcpp::Rcerr << "birthyear for individual with pid = " << pid << " not found!" << std::endl;
+          Rcpp::stop("birthyear for individual not found");
+        }
+        int birthyear_child = got_child->second;
+
+        c_pids.push_back(child_pid);
+        c_birthyears.push_back(birthyear_child);                
+      }
+    }
+    
+    List i_info;
+    i_info["parent_pid"] = pid;
+    i_info["parent_birthyear"] = birthyear;
+    i_info["children_pid"] = c_pids;
+    i_info["children_birthyears"] = c_birthyears;
+    
+    children_pids[i] = i_info;
+    
+    if (i % CHECK_ABORT_EVERY == 0 && Progress::check_abort() ) {
+      return children_pids;
+    }
+    
+    if (progress) {
+      p.increment();
+    }
+  }
+  
+  return children_pids;
+}
+
 //[[Rcpp::export]]
 void popr_test() {
   Rcout << "mikl was here" << std::endl;
@@ -118,6 +189,9 @@ int pedigree_size(Rcpp::XPtr<Pedigree> ped) {
   return ped->get_all_individuals()->size();
 }
 
+//' Get distribution of pedigree sizes
+//' 
+//' @export
 //[[Rcpp::export]]
 std::unordered_map<int, int> pedigrees_table(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees) {
   std::vector<Pedigree*>* peds = pedigrees;

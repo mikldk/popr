@@ -67,6 +67,13 @@ get_number_of_children <- function(population, progress = TRUE) {
     .Call('popr_get_number_of_children', PACKAGE = 'popr', population, progress)
 }
 
+#' Get ages children
+#' 
+#' @export
+get_male_children_pids <- function(population, pids, pid_birthyear, progress = TRUE) {
+    .Call('popr_get_male_children_pids', PACKAGE = 'popr', population, pids, pid_birthyear, progress)
+}
+
 popr_test <- function() {
     invisible(.Call('popr_popr_test', PACKAGE = 'popr'))
 }
@@ -85,6 +92,9 @@ pedigree_size <- function(ped) {
     .Call('popr_pedigree_size', PACKAGE = 'popr', ped)
 }
 
+#' Get distribution of pedigree sizes
+#' 
+#' @export
 pedigrees_table <- function(pedigrees) {
     .Call('popr_pedigrees_table', PACKAGE = 'popr', pedigrees)
 }
