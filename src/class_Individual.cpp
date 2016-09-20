@@ -100,6 +100,15 @@ void Individual::set_pedigree_id(int id, Pedigree* ped, int* pedigree_size) {
   }
 }
 
+void Individual::set_alive_status(bool is_alive) {
+  m_is_alive = is_alive;
+}
+
+
+void Individual::set_birth_year(int birth_year) {
+  m_birth_year = birth_year;
+}
+
 void Individual::set_location(double etrs89e, double etrs89n) {
   m_etrs89e = etrs89e;
   m_etrs89n = etrs89n;

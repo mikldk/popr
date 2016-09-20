@@ -6,6 +6,8 @@ class Individual {
 private:
   int m_pid; 
   bool m_is_male; // CANNOT BE 0/NA!
+  int m_birth_year = 0;
+  bool m_is_alive = false;
   
   std::vector<Individual*>* m_children = NULL;
   Individual* m_mother = NULL;
@@ -39,6 +41,10 @@ public:
   int get_pedigree_id() const;
   
   void set_pedigree_id(int id, Pedigree* ped, int* pedigree_size);
+  
+  void set_alive_status(bool is_alive);
+  
+  void set_birth_year(int birth_year);
   
   void set_location(double etrs89e, double etrs89n);
   

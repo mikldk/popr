@@ -26,6 +26,8 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
                                         LogicalVector is_male, 
                                         IntegerVector pid_mom, 
                                         IntegerVector pid_dad, 
+                                        LogicalVector is_alive = LogicalVector::create(), 
+                                        IntegerVector birth_year = IntegerVector::create(),
                                         NumericVector etrs89e = NumericVector::create(), 
                                         NumericVector etrs89n = NumericVector::create(),
                                         bool progress = true, 
@@ -40,9 +42,15 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
   int N = pid.size();
   
   if (is_male.size() != N || pid_mom.size() != N || pid_dad.size() != N || 
+      (is_alive.size() != 0 && is_alive.size() != N) ||
+      (birth_year.size() != 0 && birth_year.size() != N) ||  
       (etrs89e.size() != 0 && etrs89e.size() != N) || 
       (etrs89n.size() != 0 && etrs89n.size() != N)) {
-    stop("all vectors (pid, pid_mom, pid_dad, etrs89e, etrs89n) must have same length");
+    stop("all vectors (pid, pid_mom, pid_dad, is_alive*, birth_year*, etrs89e*, etrs89n*) must have same length (or length 0 for *-marked)");
+  }
+  
+  if (etrs89e.size() != etrs89n.size()) {
+    stop("etrs89e and etrs89n must have same length");
   }
   
   // N for building hashmap, and N for building relations (adding children)
@@ -57,7 +65,15 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
     bool i_is_male = is_male[k];
     
     Individual* i = new Individual(i_pid, i_is_male);
+
+    if (is_alive.size() == N && !LogicalVector::is_na(is_alive[k])) {
+      i->set_alive_status(is_alive[k]);
+    }
     
+    if (birth_year.size() == N && !IntegerVector::is_na(birth_year[k])) {
+      i->set_birth_year(birth_year[k]);
+    }
+        
     if (etrs89e.size() == N && etrs89n.size() == N && !NumericVector::is_na(etrs89e[k]) && !NumericVector::is_na(etrs89n[k])) {
       i->set_location(etrs89e[k], etrs89n[k]);
     }
