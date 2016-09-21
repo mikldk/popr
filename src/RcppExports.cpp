@@ -53,15 +53,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // build_kdtree_from_pids
-Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size);
-RcppExport SEXP popr_build_kdtree_from_pids(SEXP pidsSEXP, SEXP populationSEXP, SEXP max_leaf_sizeSEXP) {
+Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size, bool report_progress);
+RcppExport SEXP popr_build_kdtree_from_pids(SEXP pidsSEXP, SEXP populationSEXP, SEXP max_leaf_sizeSEXP, SEXP report_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type pids(pidsSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<Population> >::type population(populationSEXP);
     Rcpp::traits::input_parameter< int >::type max_leaf_size(max_leaf_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(build_kdtree_from_pids(pids, population, max_leaf_size));
+    Rcpp::traits::input_parameter< bool >::type report_progress(report_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(build_kdtree_from_pids(pids, population, max_leaf_size, report_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -269,6 +270,21 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
     rcpp_result_gen = Rcpp::wrap(get_pids_in_pedigree(ped));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_pids_in_pedigree_criteria
+IntegerVector get_pids_in_pedigree_criteria(Rcpp::XPtr<Pedigree> ped, bool must_be_alive, bool use_birth_year, int birth_year_min, int birth_year_max);
+RcppExport SEXP popr_get_pids_in_pedigree_criteria(SEXP pedSEXP, SEXP must_be_aliveSEXP, SEXP use_birth_yearSEXP, SEXP birth_year_minSEXP, SEXP birth_year_maxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
+    Rcpp::traits::input_parameter< bool >::type must_be_alive(must_be_aliveSEXP);
+    Rcpp::traits::input_parameter< bool >::type use_birth_year(use_birth_yearSEXP);
+    Rcpp::traits::input_parameter< int >::type birth_year_min(birth_year_minSEXP);
+    Rcpp::traits::input_parameter< int >::type birth_year_max(birth_year_maxSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_pids_in_pedigree_criteria(ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max));
     return rcpp_result_gen;
 END_RCPP
 }

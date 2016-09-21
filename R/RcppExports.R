@@ -29,8 +29,8 @@ build_kdtree_from_pedigree <- function(pedigree, max_leaf_size) {
 #' Build kd-tree from a list of pids
 #' 
 #' @export
-build_kdtree_from_pids <- function(pids, population, max_leaf_size) {
-    .Call('popr_build_kdtree_from_pids', PACKAGE = 'popr', pids, population, max_leaf_size)
+build_kdtree_from_pids <- function(pids, population, max_leaf_size, report_progress = FALSE) {
+    .Call('popr_build_kdtree_from_pids', PACKAGE = 'popr', pids, population, max_leaf_size, report_progress)
 }
 
 analyse_meioses_search_tree <- function(population, search_tree, pids, radii, report_progress = FALSE) {
@@ -117,11 +117,18 @@ print_pedigree <- function(ped) {
     invisible(.Call('popr_print_pedigree', PACKAGE = 'popr', ped))
 }
 
-#' Build pedigrees
+#' get pids in pedigree
 #' 
 #' @export
 get_pids_in_pedigree <- function(ped) {
     .Call('popr_get_pids_in_pedigree', PACKAGE = 'popr', ped)
+}
+
+#' get pids in pedigree with certain criteria
+#' 
+#' @export
+get_pids_in_pedigree_criteria <- function(ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max) {
+    .Call('popr_get_pids_in_pedigree_criteria', PACKAGE = 'popr', ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max)
 }
 
 get_pedigree_edgelist <- function(ped) {

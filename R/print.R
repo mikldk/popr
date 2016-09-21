@@ -54,8 +54,13 @@ print.popr_pedigreelist <-
 #' @export
 `[[.popr_population` <- function(x, ...) {
   pid <- ..1
-  if (length(pid) != 1L || !is.integer(pid)) {
+  if (length(pid) != 1L || !is.numeric(pid)) {
     stop("Wrong individual selected or invalid element selection criteria")
+  }
+  
+  if (!is.integer(pid)) {
+    pid <- as.integer(pid)
+    warning("Converting to integer explicitely (remember L postfix)")
   }
   
   p <- get_individual(x, pid)

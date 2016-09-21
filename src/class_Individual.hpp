@@ -43,9 +43,11 @@ public:
   void set_pedigree_id(int id, Pedigree* ped, int* pedigree_size);
   
   void set_alive_status(bool is_alive);
-  
+  bool get_alive_status() const;  
+
   void set_birth_year(int birth_year);
-  
+  int get_birth_year() const;
+
   void set_location(double etrs89e, double etrs89n);
   
   double get_etrs89e() const;

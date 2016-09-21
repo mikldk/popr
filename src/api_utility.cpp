@@ -270,7 +270,7 @@ void print_pedigree(Rcpp::XPtr<Pedigree> ped) {
   } 
 }
 
-//' Build pedigrees
+//' get pids in pedigree
 //' 
 //' @export
 // [[Rcpp::export]]
@@ -284,6 +284,42 @@ IntegerVector get_pids_in_pedigree(Rcpp::XPtr<Pedigree> ped) {
   for (auto ind : *inds) {   
     res(i) = ind->get_pid();
     ++i;
+  } 
+  
+  return res;
+}
+
+//' get pids in pedigree with certain criteria
+//' 
+//' @export
+// [[Rcpp::export]]
+IntegerVector get_pids_in_pedigree_criteria(Rcpp::XPtr<Pedigree> ped, bool must_be_alive, bool use_birth_year, int birth_year_min, int birth_year_max) {    
+  Pedigree* p = ped;
+  
+  std::vector<Individual*>* inds = p->get_all_individuals();
+  
+  IntegerVector res;
+
+  for (auto ind : *inds) {   
+    bool skip = false;
+    
+    if (must_be_alive && ind->get_alive_status() == false) {
+      skip = true;
+    }
+    
+    if (!skip && use_birth_year) {
+      int birth_year = ind->get_birth_year();
+      
+      if (birth_year < birth_year_min || birth_year > birth_year_max) {
+        skip = true;
+      }
+    }
+    
+    if (skip) {
+      continue;
+    }
+  
+    res.push_back(ind->get_pid());
   } 
   
   return res;

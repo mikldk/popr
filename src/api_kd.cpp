@@ -46,11 +46,11 @@ Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pedigree(Rcpp::XPtr<Pedigree> 
 //' 
 //' @export
 // [[Rcpp::export]]
-Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size) {
+Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size, bool report_progress = false) {
   Population* pop = population;
   int N = pids.size();
   int k = 0;
-  Progress p(N, true);
+  Progress p(N, report_progress);
   PointCloud<double>* cloud = new PointCloud<double>();
   cloud->m_points.resize(N);
   
@@ -76,7 +76,9 @@ Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp:
       return res;
     }
     
-    p.increment();
+    if (report_progress) {
+      p.increment();
+    }
   }
   
   index->buildIndex();
