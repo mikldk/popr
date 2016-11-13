@@ -700,7 +700,7 @@ void pedigrees_all_populate_father_haplotypes(Rcpp::XPtr< std::vector<Pedigree*>
   Progress p(N, progress);
   
   for (size_t i = 0; i < N; ++i) {
-    peds(i)->populate_father_haplotypes(loci, mutation_rate);
+    peds.at(i)->populate_father_haplotypes(loci, mutation_rate);
     
      if (i % CHECK_ABORT_EVERY == 0 && Progress::check_abort()) {
       stop("Aborted.");
