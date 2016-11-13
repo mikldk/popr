@@ -356,3 +356,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// pedigree_populate_father_haplotypes
+void pedigree_populate_father_haplotypes(Rcpp::XPtr<Pedigree> ped, int loci, double mutation_rate);
+RcppExport SEXP popr_pedigree_populate_father_haplotypes(SEXP pedSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
+    Rcpp::traits::input_parameter< int >::type loci(lociSEXP);
+    Rcpp::traits::input_parameter< double >::type mutation_rate(mutation_rateSEXP);
+    pedigree_populate_father_haplotypes(ped, loci, mutation_rate);
+    return R_NilValue;
+END_RCPP
+}
+// pedigrees_all_populate_father_haplotypes
+void pedigrees_all_populate_father_haplotypes(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees, int loci, double mutation_rate, bool progress);
+RcppExport SEXP popr_pedigrees_all_populate_father_haplotypes(SEXP pedigreesSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr< std::vector<Pedigree*> > >::type pedigrees(pedigreesSEXP);
+    Rcpp::traits::input_parameter< int >::type loci(lociSEXP);
+    Rcpp::traits::input_parameter< double >::type mutation_rate(mutation_rateSEXP);
+    Rcpp::traits::input_parameter< bool >::type progress(progressSEXP);
+    pedigrees_all_populate_father_haplotypes(pedigrees, loci, mutation_rate, progress);
+    return R_NilValue;
+END_RCPP
+}
+// pedigree_get_father_haplotypes_pids
+List pedigree_get_father_haplotypes_pids(Rcpp::XPtr<Population> population, IntegerVector pids);
+RcppExport SEXP popr_pedigree_get_father_haplotypes_pids(SEXP populationSEXP, SEXP pidsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Population> >::type population(populationSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type pids(pidsSEXP);
+    rcpp_result_gen = Rcpp::wrap(pedigree_get_father_haplotypes_pids(population, pids));
+    return rcpp_result_gen;
+END_RCPP
+}

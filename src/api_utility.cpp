@@ -54,7 +54,7 @@ IntegerMatrix get_number_of_children(Rcpp::XPtr<Population> population, bool pro
     
     ++i;
     
-    if (i % CHECK_ABORT_EVERY == 0 && Progress::check_abort() ) {
+    if (i % CHECK_ABORT_EVERY == 0 && Progress::check_abort()) {
       return children_count;
     }
     
@@ -453,7 +453,9 @@ IntegerMatrix meiosis_dist_tree_matrix(Rcpp::XPtr<Pedigree> ped) {
   return res;
 }
 
-
+//' Get pedigree from individual
+//' 
+//' @export
 //[[Rcpp::export]]
 Rcpp::XPtr<Pedigree> get_pedigree_from_individual(Rcpp::XPtr<Individual> individual) {  
   Individual* i = individual;  
@@ -674,5 +676,74 @@ List extend_male_pedigrees_one_generation(IntegerVector pid, IntegerVector birth
 
 
 */
+
+
+
+
+
+
+
+
+//' @export
+// [[Rcpp::export]]
+void pedigree_populate_father_haplotypes(Rcpp::XPtr<Pedigree> ped, int loci, double mutation_rate) {  
+  Pedigree* p = ped;
+  ped->populate_father_haplotypes(loci, mutation_rate);
+}
+
+//' @export
+// [[Rcpp::export]]
+void pedigrees_all_populate_father_haplotypes(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees, int loci, double mutation_rate, bool progress = true) {
+  std::vector<Pedigree*> peds = (*pedigrees);
+  
+  size_t N = peds.size();
+  Progress p(N, progress);
+  
+  for (size_t i = 0; i < N; ++i) {
+    peds(i)->populate_father_haplotypes(loci, mutation_rate);
+    
+     if (i % CHECK_ABORT_EVERY == 0 && Progress::check_abort()) {
+      stop("Aborted.");
+    }
+    
+    if (progress) {
+      p.increment();
+    }
+  }
+}
+
+
+//' @export
+// [[Rcpp::export]]
+List pedigree_get_father_haplotypes_pids(Rcpp::XPtr<Population> population, IntegerVector pids) {  
+ 
+  size_t N = pids.size();
+  List haps(N);
+  
+  for (size_t i = 0; i < N; ++i) {
+    Individual* indv = population->get_individual(pids[i]);
+    haps(i) = indv->get_father_haplotype();
+  }
+  
+  return haps;
+}
+
+/*
+//' @export
+// [[Rcpp::export]]
+List pedigree_get_father_haplotypes_pedigree(Rcpp::XPtr<Pedigree> ped) {  
+  std::vector<Individual*> inds = *(ped->get_all_individuals());
+  size_t N = inds.size();
+  List haps(N);
+  
+  for (size_t i = 0; i < N; ++i) {
+    Individual* indv = inds[i];
+    haps(i) = indv->get_father_haplotype();
+  }
+  
+  return haps;
+}
+*/
+
 
 

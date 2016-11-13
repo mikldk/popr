@@ -150,6 +150,9 @@ meiosis_dist_tree_matrix <- function(ped) {
     .Call('popr_meiosis_dist_tree_matrix', PACKAGE = 'popr', ped)
 }
 
+#' Get pedigree from individual
+#' 
+#' @export
 get_pedigree_from_individual <- function(individual) {
     .Call('popr_get_pedigree_from_individual', PACKAGE = 'popr', individual)
 }
@@ -159,5 +162,20 @@ get_pedigree_from_individual <- function(individual) {
 #' @export
 get_pedigree_id_from_pid <- function(population, pids) {
     .Call('popr_get_pedigree_id_from_pid', PACKAGE = 'popr', population, pids)
+}
+
+#' @export
+pedigree_populate_father_haplotypes <- function(ped, loci, mutation_rate) {
+    invisible(.Call('popr_pedigree_populate_father_haplotypes', PACKAGE = 'popr', ped, loci, mutation_rate))
+}
+
+#' @export
+pedigrees_all_populate_father_haplotypes <- function(pedigrees, loci, mutation_rate, progress = TRUE) {
+    invisible(.Call('popr_pedigrees_all_populate_father_haplotypes', PACKAGE = 'popr', pedigrees, loci, mutation_rate, progress))
+}
+
+#' @export
+pedigree_get_father_haplotypes_pids <- function(population, pids) {
+    .Call('popr_pedigree_get_father_haplotypes_pids', PACKAGE = 'popr', population, pids)
 }
 

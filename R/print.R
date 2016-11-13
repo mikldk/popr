@@ -104,4 +104,20 @@ plot.popr_pedigree <-
     #eturn(g)
   }
   
+#' @export  
+plot_with_haplotypes <-
+  function(x, population, ...) {
+    if (!is(x, "popr_pedigree")) stop("x must be a popr_pedigree object")
+    
+    x_pids <- get_pids_in_pedigree(x)
+    haps <- pedigree_get_father_haplotypes_pids(population, x_pids)
+    haps_str <- unlist(lapply(haps, paste0, collapse = ","))
+    
+    g <- pedigree_as_igraph(x)
+    igraph::plot.igraph(g, vertex.label = haps_str)
+    
+    return(invisible(NULL))
+    #eturn(g)
+  }
+  
   

@@ -54,3 +54,42 @@ std::vector< std::pair<Individual*, Individual*>* >* Pedigree::get_relations() c
   return m_relations;
 }
 
+
+
+
+
+
+void Pedigree::populate_father_haplotypes(int loci, double mutation_rate) {
+  /* FIXME: Exploits tree */
+  Individual* root = NULL;
+  bool root_set = false;
+  
+  for (auto &individual : (*m_all_individuals)) {
+    if (individual->get_father() == NULL) {
+      if (root_set) {
+        Rcpp::stop("Only expected one root in male pedigree!");
+      } else {
+        root = individual;
+        root_set = true;
+      }
+      
+      break;
+    }
+  }
+  
+  if (!root_set) {
+    Rcpp::stop("Expected a root in male pedigree!");
+  }
+  
+  std::vector<int> h(loci);
+  for (int loc = 0; loc < loci; ++loc) {
+    h.push_back(0);
+  }
+  
+  root->set_father_haplotype(h);
+  root->pass_haplotype_to_children(true, mutation_rate);
+}
+
+
+
+

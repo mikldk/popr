@@ -140,8 +140,8 @@ meioses_distribution_for_tree_pedigrees <- function(population, search_tree_unre
   tmp_d1_corrected[is.na(tmp_d1_corrected)] <- 0
   
   tmp_d1_corrected <- tmp_d1_corrected %>%
-    mutate(n = n.x - n.y) %>% 
-    select(-n.x, -n.y)
+    dplyr::mutate(n = n.x - n.y) %>% 
+    dplyr::select(-n.x, -n.y)
   
   tmp_d <- rbind(tmp_d1_corrected, tmp_d2_tbl)
   
@@ -229,8 +229,8 @@ meioses_distribution <- function(population, search_tree_unrelated, max_leaf_siz
                  group_by(pid, radius_id) %>% 
                  summarise(n = sum(n)), 
                c("pid", "radius_id")) %>% 
-    mutate(n = n.x - n.y) %>% 
-    select(-n.x, -n.y)
+    dplyr::mutate(n = n.x - n.y) %>% 
+    dplyr::select(-n.x, -n.y)
   
   tmp_d <- rbind(tmp_d1_corrected, tmp_d2_tbl)
   

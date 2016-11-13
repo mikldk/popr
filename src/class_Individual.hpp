@@ -24,6 +24,11 @@ private:
   
   bool m_dijkstra_visited = false;
   int m_dijkstra_distance = 0;
+
+  std::vector<int> m_father_haplotype;
+  bool m_father_haplotype_set = false;
+  bool m_father_haplotype_mutated = false;
+  void father_haplotype_mutate(double mutation_rate);
   
 public:
   Individual(int pid, bool is_male);
@@ -62,5 +67,10 @@ public:
   void dijkstra_mark_visited();
   int dijkstra_get_distance() const;
   bool dijkstra_was_visited() const;
+  
+  bool is_father_haplotype_set() const;
+  void set_father_haplotype(std::vector<int> h);
+  std::vector<int> get_father_haplotype() const;
+  void pass_haplotype_to_children(bool recursive, double mutation_rate);
 };
 

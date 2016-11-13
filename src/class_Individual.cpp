@@ -263,3 +263,56 @@ int Individual::meiosis_dist_tree(Individual* dest) const {
 }
 
 
+
+
+
+
+/*
+Father haplotype
+FIXME mutation_model?
+*/
+void Individual::father_haplotype_mutate(double mutation_rate) {
+  if (!m_father_haplotype_set) {
+    Rcpp::stop("Father haplotype not set yet, so cannot mutate");
+  }
+  if (m_father_haplotype_mutated) {
+    Rcpp::stop("Father haplotype already set and mutated");
+  }
+  
+  for (int loc = 0; loc < m_father_haplotype.size(); ++loc) {
+    if (R::runif(0.0, 1.0) < mutation_rate) {
+      if (R::runif(0.0, 1.0) < 0.5) {
+        m_father_haplotype[loc] = m_father_haplotype[loc] - 1;
+      } else {
+        m_father_haplotype[loc] = m_father_haplotype[loc] + 1;
+      }
+    }
+  }
+}
+
+bool Individual::is_father_haplotype_set() const {
+  return m_father_haplotype_set; 
+}
+
+void Individual::set_father_haplotype(std::vector<int> h) {
+  m_father_haplotype = h;
+  m_father_haplotype_set = true;
+}
+
+std::vector<int> Individual::get_father_haplotype() const {
+  return m_father_haplotype;
+}
+
+void Individual::pass_haplotype_to_children(bool recursive, double mutation_rate) {
+  for (auto &child : (*m_children)) {
+    child->set_father_haplotype(m_father_haplotype);
+    child->father_haplotype_mutate(mutation_rate);
+    
+    if (recursive) {
+      child->pass_haplotype_to_children(recursive, mutation_rate);
+    }
+  }
+}
+
+
+
