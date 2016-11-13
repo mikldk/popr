@@ -81,10 +81,7 @@ void Pedigree::populate_father_haplotypes(int loci, double mutation_rate) {
     Rcpp::stop("Expected a root in male pedigree!");
   }
   
-  std::vector<int> h(loci);
-  for (int loc = 0; loc < loci; ++loc) {
-    h.push_back(0);
-  }
+  std::vector<int> h(loci); // initialises to 0, 0, ..., 0
   
   root->set_father_haplotype(h);
   root->pass_haplotype_to_children(true, mutation_rate);
