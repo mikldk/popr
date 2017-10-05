@@ -9,4 +9,3 @@ pedigree_size(ped)
 \description{
 Get pedigree size
 }
-

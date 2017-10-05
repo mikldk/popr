@@ -316,3 +316,16 @@ void Individual::pass_haplotype_to_children(bool recursive, double mutation_rate
 
 
 
+
+
+
+void Individual::set_include_meioses_dist(bool status) {
+  m_include_meioses_dist = status;
+}
+
+bool Individual::get_include_meioses_dist() const {
+  return m_include_meioses_dist;
+}
+
+
+

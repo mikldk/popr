@@ -9,4 +9,3 @@ build_pedigrees(population, progress = TRUE)
 \description{
 Build pedigrees
 }
-

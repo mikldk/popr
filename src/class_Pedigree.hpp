@@ -12,6 +12,7 @@ private:
 public:
   Pedigree(int id);
   ~Pedigree();
+  int get_id() const;
   void add_member(Individual* i);
   void add_relation(Individual* lhs, Individual* rhs);
   std::vector<Individual*>* get_all_individuals() const;

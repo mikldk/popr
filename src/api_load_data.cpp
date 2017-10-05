@@ -103,12 +103,12 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
       
       if (m == pop->end()) {
         std::ostringstream err;
-        err << "pid_mom = " << i_pid_mom << " for pid = " << i_pid << " was not found as a pid itself!";
+        err << "NOT FOUND: pid_mom = " << i_pid_mom << " for pid = " << i_pid << " was not found as a pid itself!";
         stop(err.str());
       } else {
         if (m->second->get_is_male()) {
           std::ostringstream err;
-          err << "pid_mom = " << i_pid_mom << " for pid = " << i_pid << " was a male!";
+          err << "NOT FEMALE: pid_mom = " << i_pid_mom << " for pid = " << i_pid << " was a male!";
           
           if (error_on_gender_mismatch) {
             stop(err.str());
@@ -127,12 +127,12 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
       std::unordered_map<int, Individual*>::const_iterator f = pop->find(i_pid_dad);    
       if (f == pop->end()) {
         std::ostringstream err;
-        err << "pid_dad = " << i_pid_dad << " for pid = " << i_pid << " was not found as a pid itself!";
+        err << "NOT FOUND: pid_dad = " << i_pid_dad << " for pid = " << i_pid << " was not found as a pid itself!";
         stop(err.str());
       } else {
         if (!(f->second->get_is_male())) {
           std::ostringstream err;
-          err << "pid_dad = " << pid_dad << " for pid = " << i_pid << " was not a male!";
+          err << "NOT MALE: pid_dad = " << pid_dad << " for pid = " << i_pid << " was not a male!";
           
           if (error_on_gender_mismatch) {
             stop(err.str());
@@ -146,8 +146,7 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
       }
     }
     
-    if (k % CHECK_ABORT_EVERY == 0 && Progress::check_abort() ) {
-      
+    if (k % CHECK_ABORT_EVERY == 0 && Progress::check_abort() ) {      
       return res;
     }
     
@@ -156,7 +155,9 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
     }
   }
   
-  population->build_pointcloud();
+  if (etrs89e.size() != 0 && etrs89n.size() != 0) {
+    population->build_pointcloud();
+  }
 
   res.attr("class") = CharacterVector::create("popr_population", "externalptr");
   

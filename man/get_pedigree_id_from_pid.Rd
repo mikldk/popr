@@ -9,4 +9,3 @@ get_pedigree_id_from_pid(population, pids)
 \description{
 Get pedigree id from pid
 }
-

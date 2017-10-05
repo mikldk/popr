@@ -7,6 +7,8 @@
 
 #include "popr_types.hpp"
 
+using namespace Rcpp;
+
 //[[Rcpp::export]]
 void popr_test() {
   Rcout << "mikl was here 1324" << std::endl;
@@ -254,6 +256,12 @@ void print_individual(Rcpp::XPtr<Individual> individual) {
 
 
 //[[Rcpp::export]]
+int get_children_count(Rcpp::XPtr<Individual> individual) {  
+  return individual->get_children()->size();
+}
+
+
+//[[Rcpp::export]]
 void print_pedigree(Rcpp::XPtr<Pedigree> ped) {  
   Pedigree* p = ped;
   
@@ -453,6 +461,121 @@ IntegerMatrix meiosis_dist_tree_matrix(Rcpp::XPtr<Pedigree> ped) {
   return res;
 }
 
+
+//' Set include meioses dist
+//' 
+//' @export
+//[[Rcpp::export]]
+void set_individual_include_meioses_dist(Rcpp::XPtr<Population> population, IntegerVector pids, LogicalVector statuses) {
+  int N = pids.size();
+  
+  if (N != statuses.size()) {
+    stop("pids.size() != statuses.size()");
+  }
+  
+  for (int i = 0; i < N; ++i) {
+    Individual* ind = population->get_individual(pids[i]);
+    ind->set_include_meioses_dist(statuses[i]);
+  }  
+}
+
+//' Get meioses dist for individual
+//' 
+//' @export
+//[[Rcpp::export]]
+List get_individual_meioses_dist(Rcpp::XPtr<Individual> individual, NumericVector prob_not_mut) {
+  std::unordered_map<int, int> dists;
+  
+  List ret_value;
+  
+  if (individual->get_include_meioses_dist() == false) {
+    return ret_value;
+  }
+  
+  Pedigree* ped = individual->get_pedigree();
+  
+  std::vector<Individual*>* inds = ped->get_all_individuals();
+  
+  for (auto dest : *inds) {
+    if (dest->get_include_meioses_dist() == false) {
+      continue;
+    }
+    
+    int dist = individual->meiosis_dist_tree(dest);
+    dists[dist] += 1;
+  }
+  
+  int res_i = 0;
+  IntegerMatrix res(dists.size(), 2);
+  colnames(res) = CharacterVector::create("d", "count");
+  
+  for (auto it = dists.begin(); it != dists.end(); ++it) {
+    res(res_i, 0) = it->first;
+    res(res_i, 1) = it->second;
+    ++res_i;
+  }
+  ret_value["dist"] = res;
+  
+    
+  NumericVector ws(prob_not_mut.size());
+  
+  for (int i = 0; i < prob_not_mut.size(); ++i) {
+    for (auto it = dists.begin(); it != dists.end(); ++it) {
+      ws[i] += (double)(it->second) * pow(prob_not_mut[i], (double)(it->first));
+    }
+  }
+  ret_value["weights"] = ws;
+  
+  
+
+  return ret_value;
+}
+
+
+//' Get meioses dist for individual
+//' 
+//' @export
+//[[Rcpp::export]]
+NumericVector get_individual_meioses_dist_ONLY_WEIGHTS(Rcpp::XPtr<Individual> individual, NumericVector prob_not_mut) {
+  std::unordered_map<int, int> dists;
+  NumericVector ws(prob_not_mut.size());
+  
+  ws.names() = prob_not_mut.names();
+  
+  List ret_value;
+  
+  if (individual->get_include_meioses_dist() == false) {
+    for (int i = 0; i < prob_not_mut.size(); ++i) {
+      ws[i] = NA_REAL;
+    }
+    
+    return ws;
+  }
+  
+  Pedigree* ped = individual->get_pedigree();
+  
+  std::vector<Individual*>* inds = ped->get_all_individuals();
+  
+  for (auto dest : *inds) {
+    if (dest->get_include_meioses_dist() == false) {
+      continue;
+    }
+    
+    int dist = individual->meiosis_dist_tree(dest);
+    dists[dist] += 1;
+  }
+  
+  for (int i = 0; i < prob_not_mut.size(); ++i) {
+    for (auto it = dists.begin(); it != dists.end(); ++it) {
+      ws[i] += (double)(it->second) * pow(prob_not_mut[i], (double)(it->first));
+    }
+  }
+
+  return ws;
+}
+
+
+
 //' Get pedigree from individual
 //' 
 //' @export
@@ -483,6 +606,13 @@ IntegerVector get_pedigree_id_from_pid(Rcpp::XPtr<Population> population, Intege
   return pedigree_ids;
 }
 
+//' Get pedigree id from pedigree
+//' 
+//' @export
+// [[Rcpp::export]]
+int get_pedigree_id_from_pedigree(Rcpp::XPtr<Pedigree> ped) {   
+  return ped->get_id();
+}
 
 
 /*

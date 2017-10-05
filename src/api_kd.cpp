@@ -8,6 +8,8 @@
 
 #include "popr_types.hpp"
 
+using namespace Rcpp;
+
 SearchDataStructure* build_kdtree_from_pointcloud(PointCloud<double>* pointcloud, int max_leaf_size) {
   kd_tree* index = new kd_tree(2, *pointcloud, nanoflann::KDTreeSingleIndexAdaptorParams(max_leaf_size /* max leaf */));
   index->buildIndex();

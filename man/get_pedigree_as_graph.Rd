@@ -9,4 +9,3 @@ get_pedigree_as_graph(ped)
 \description{
 Get pedigree information as graph (mainly intended for plotting)
 }
-

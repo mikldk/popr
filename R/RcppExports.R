@@ -2,73 +2,73 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 wipe_pedigrees <- function(pedigrees) {
-    invisible(.Call('popr_wipe_pedigrees', PACKAGE = 'popr', pedigrees))
+    invisible(.Call('_popr_wipe_pedigrees', PACKAGE = 'popr', pedigrees))
 }
 
 #' Build pedigrees
 #' 
 #' @export
 build_pedigrees <- function(population, progress = TRUE) {
-    .Call('popr_build_pedigrees', PACKAGE = 'popr', population, progress)
+    .Call('_popr_build_pedigrees', PACKAGE = 'popr', population, progress)
 }
 
 #' Build kd-tree with all individuals from population
 #' 
 #' @export
 build_kdtree_from_population <- function(population, max_leaf_size) {
-    .Call('popr_build_kdtree_from_population', PACKAGE = 'popr', population, max_leaf_size)
+    .Call('_popr_build_kdtree_from_population', PACKAGE = 'popr', population, max_leaf_size)
 }
 
 #' Build kd-tree with all individuals from pedigree
 #' 
 #' @export
 build_kdtree_from_pedigree <- function(pedigree, max_leaf_size) {
-    .Call('popr_build_kdtree_from_pedigree', PACKAGE = 'popr', pedigree, max_leaf_size)
+    .Call('_popr_build_kdtree_from_pedigree', PACKAGE = 'popr', pedigree, max_leaf_size)
 }
 
 #' Build kd-tree from a list of pids
 #' 
 #' @export
 build_kdtree_from_pids <- function(pids, population, max_leaf_size, report_progress = FALSE) {
-    .Call('popr_build_kdtree_from_pids', PACKAGE = 'popr', pids, population, max_leaf_size, report_progress)
+    .Call('_popr_build_kdtree_from_pids', PACKAGE = 'popr', pids, population, max_leaf_size, report_progress)
 }
 
 analyse_meioses_search_tree <- function(population, search_tree, pids, radii, report_progress = FALSE) {
-    .Call('popr_analyse_meioses_search_tree', PACKAGE = 'popr', population, search_tree, pids, radii, report_progress)
+    .Call('_popr_analyse_meioses_search_tree', PACKAGE = 'popr', population, search_tree, pids, radii, report_progress)
 }
 
 get_pids_within_radius <- function(ind, search_tree, radius) {
-    .Call('popr_get_pids_within_radius', PACKAGE = 'popr', ind, search_tree, radius)
+    .Call('_popr_get_pids_within_radius', PACKAGE = 'popr', ind, search_tree, radius)
 }
 
 radius_search_count <- function(population, search_tree, pids, radii, report_progress = FALSE) {
-    .Call('popr_radius_search_count', PACKAGE = 'popr', population, search_tree, pids, radii, report_progress)
+    .Call('_popr_radius_search_count', PACKAGE = 'popr', population, search_tree, pids, radii, report_progress)
 }
 
 wipe_population <- function(population) {
-    invisible(.Call('popr_wipe_population', PACKAGE = 'popr', population))
+    invisible(.Call('_popr_wipe_population', PACKAGE = 'popr', population))
 }
 
 #' Construct a population
 #' 
 #' @export
 load_individuals <- function(pid, is_male, pid_mom, pid_dad, is_alive = as.logical( c()), birth_year = as.integer( c()), etrs89e = as.numeric( c()), etrs89n = as.numeric( c()), progress = TRUE, error_on_gender_mismatch = TRUE) {
-    .Call('popr_load_individuals', PACKAGE = 'popr', pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch)
+    .Call('_popr_load_individuals', PACKAGE = 'popr', pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch)
 }
 
 popr_test <- function() {
-    invisible(.Call('popr_popr_test', PACKAGE = 'popr'))
+    invisible(.Call('_popr_popr_test', PACKAGE = 'popr'))
 }
 
 pop_size <- function(population) {
-    .Call('popr_pop_size', PACKAGE = 'popr', population)
+    .Call('_popr_pop_size', PACKAGE = 'popr', population)
 }
 
 #' Get number of children for each individual in the population
 #' 
 #' @export
 get_number_of_children <- function(population, progress = TRUE) {
-    .Call('popr_get_number_of_children', PACKAGE = 'popr', population, progress)
+    .Call('_popr_get_number_of_children', PACKAGE = 'popr', population, progress)
 }
 
 #' Get ages children
@@ -77,105 +77,137 @@ get_number_of_children <- function(population, progress = TRUE) {
 #'  
 #' @export
 get_male_children_pids_birthyear <- function(population, pids, pid_birthyear, progress = TRUE) {
-    .Call('popr_get_male_children_pids_birthyear', PACKAGE = 'popr', population, pids, pid_birthyear, progress)
+    .Call('_popr_get_male_children_pids_birthyear', PACKAGE = 'popr', population, pids, pid_birthyear, progress)
 }
 
 #' Get number of pedigrees
 #' 
 #' @export
 pedigrees_count <- function(pedigrees) {
-    .Call('popr_pedigrees_count', PACKAGE = 'popr', pedigrees)
+    .Call('_popr_pedigrees_count', PACKAGE = 'popr', pedigrees)
 }
 
 #' Get pedigree size
 #' 
 #' @export
 pedigree_size <- function(ped) {
-    .Call('popr_pedigree_size', PACKAGE = 'popr', ped)
+    .Call('_popr_pedigree_size', PACKAGE = 'popr', ped)
 }
 
 #' Get distribution of pedigree sizes
 #' 
 #' @export
 pedigrees_table <- function(pedigrees) {
-    .Call('popr_pedigrees_table', PACKAGE = 'popr', pedigrees)
+    .Call('_popr_pedigrees_table', PACKAGE = 'popr', pedigrees)
 }
 
 get_pedigree <- function(pedigrees, index) {
-    .Call('popr_get_pedigree', PACKAGE = 'popr', pedigrees, index)
+    .Call('_popr_get_pedigree', PACKAGE = 'popr', pedigrees, index)
 }
 
 get_individual <- function(population, pid) {
-    .Call('popr_get_individual', PACKAGE = 'popr', population, pid)
+    .Call('_popr_get_individual', PACKAGE = 'popr', population, pid)
 }
 
 print_individual <- function(individual) {
-    invisible(.Call('popr_print_individual', PACKAGE = 'popr', individual))
+    invisible(.Call('_popr_print_individual', PACKAGE = 'popr', individual))
+}
+
+get_children_count <- function(individual) {
+    .Call('_popr_get_children_count', PACKAGE = 'popr', individual)
 }
 
 print_pedigree <- function(ped) {
-    invisible(.Call('popr_print_pedigree', PACKAGE = 'popr', ped))
+    invisible(.Call('_popr_print_pedigree', PACKAGE = 'popr', ped))
 }
 
 #' get pids in pedigree
 #' 
 #' @export
 get_pids_in_pedigree <- function(ped) {
-    .Call('popr_get_pids_in_pedigree', PACKAGE = 'popr', ped)
+    .Call('_popr_get_pids_in_pedigree', PACKAGE = 'popr', ped)
 }
 
 #' get pids in pedigree with certain criteria
 #' 
 #' @export
 get_pids_in_pedigree_criteria <- function(ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max) {
-    .Call('popr_get_pids_in_pedigree_criteria', PACKAGE = 'popr', ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max)
+    .Call('_popr_get_pids_in_pedigree_criteria', PACKAGE = 'popr', ped, must_be_alive, use_birth_year, birth_year_min, birth_year_max)
 }
 
 get_pedigree_edgelist <- function(ped) {
-    .Call('popr_get_pedigree_edgelist', PACKAGE = 'popr', ped)
+    .Call('_popr_get_pedigree_edgelist', PACKAGE = 'popr', ped)
 }
 
 #' Get pedigree information as graph (mainly intended for plotting)
 #' 
 #' @export
 get_pedigree_as_graph <- function(ped) {
-    .Call('popr_get_pedigree_as_graph', PACKAGE = 'popr', ped)
+    .Call('_popr_get_pedigree_as_graph', PACKAGE = 'popr', ped)
 }
 
 meiosis_dist_tree <- function(src, dest) {
-    .Call('popr_meiosis_dist_tree', PACKAGE = 'popr', src, dest)
+    .Call('_popr_meiosis_dist_tree', PACKAGE = 'popr', src, dest)
 }
 
 meiosis_dist_tree_matrix <- function(ped) {
-    .Call('popr_meiosis_dist_tree_matrix', PACKAGE = 'popr', ped)
+    .Call('_popr_meiosis_dist_tree_matrix', PACKAGE = 'popr', ped)
+}
+
+#' Set include meioses dist
+#' 
+#' @export
+set_individual_include_meioses_dist <- function(population, pids, statuses) {
+    invisible(.Call('_popr_set_individual_include_meioses_dist', PACKAGE = 'popr', population, pids, statuses))
+}
+
+#' Get meioses dist for individual
+#' 
+#' @export
+get_individual_meioses_dist <- function(individual, prob_not_mut) {
+    .Call('_popr_get_individual_meioses_dist', PACKAGE = 'popr', individual, prob_not_mut)
+}
+
+#' Get meioses dist for individual
+#' 
+#' @export
+get_individual_meioses_dist_ONLY_WEIGHTS <- function(individual, prob_not_mut) {
+    .Call('_popr_get_individual_meioses_dist_ONLY_WEIGHTS', PACKAGE = 'popr', individual, prob_not_mut)
 }
 
 #' Get pedigree from individual
 #' 
 #' @export
 get_pedigree_from_individual <- function(individual) {
-    .Call('popr_get_pedigree_from_individual', PACKAGE = 'popr', individual)
+    .Call('_popr_get_pedigree_from_individual', PACKAGE = 'popr', individual)
 }
 
 #' Get pedigree id from pid
 #' 
 #' @export
 get_pedigree_id_from_pid <- function(population, pids) {
-    .Call('popr_get_pedigree_id_from_pid', PACKAGE = 'popr', population, pids)
+    .Call('_popr_get_pedigree_id_from_pid', PACKAGE = 'popr', population, pids)
+}
+
+#' Get pedigree id from pedigree
+#' 
+#' @export
+get_pedigree_id_from_pedigree <- function(ped) {
+    .Call('_popr_get_pedigree_id_from_pedigree', PACKAGE = 'popr', ped)
 }
 
 #' @export
 pedigree_populate_father_haplotypes <- function(ped, loci, mutation_rate) {
-    invisible(.Call('popr_pedigree_populate_father_haplotypes', PACKAGE = 'popr', ped, loci, mutation_rate))
+    invisible(.Call('_popr_pedigree_populate_father_haplotypes', PACKAGE = 'popr', ped, loci, mutation_rate))
 }
 
 #' @export
 pedigrees_all_populate_father_haplotypes <- function(pedigrees, loci, mutation_rate, progress = TRUE) {
-    invisible(.Call('popr_pedigrees_all_populate_father_haplotypes', PACKAGE = 'popr', pedigrees, loci, mutation_rate, progress))
+    invisible(.Call('_popr_pedigrees_all_populate_father_haplotypes', PACKAGE = 'popr', pedigrees, loci, mutation_rate, progress))
 }
 
 #' @export
 pedigree_get_father_haplotypes_pids <- function(population, pids) {
-    .Call('popr_pedigree_get_father_haplotypes_pids', PACKAGE = 'popr', population, pids)
+    .Call('_popr_pedigree_get_father_haplotypes_pids', PACKAGE = 'popr', population, pids)
 }
 

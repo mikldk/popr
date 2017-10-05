@@ -27,6 +27,10 @@ Pedigree::~Pedigree() {
   this->m_points.clear(); // FIXME??
 }
 
+int Pedigree::get_id() const {
+  return m_pedigree_id;
+}
+
 void Pedigree::add_member(Individual* i) {
   m_all_individuals->push_back(i); // so that ones without location are included
   

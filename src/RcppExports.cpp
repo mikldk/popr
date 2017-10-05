@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // wipe_pedigrees
 void wipe_pedigrees(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees);
-RcppExport SEXP popr_wipe_pedigrees(SEXP pedigreesSEXP) {
+RcppExport SEXP _popr_wipe_pedigrees(SEXP pedigreesSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr< std::vector<Pedigree*> > >::type pedigrees(pedigreesSEXP);
@@ -18,7 +18,7 @@ END_RCPP
 }
 // build_pedigrees
 Rcpp::XPtr< std::vector<Pedigree*> > build_pedigrees(Rcpp::XPtr<Population> population, bool progress);
-RcppExport SEXP popr_build_pedigrees(SEXP populationSEXP, SEXP progressSEXP) {
+RcppExport SEXP _popr_build_pedigrees(SEXP populationSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // build_kdtree_from_population
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_population(Rcpp::XPtr<Population> population, int max_leaf_size);
-RcppExport SEXP popr_build_kdtree_from_population(SEXP populationSEXP, SEXP max_leaf_sizeSEXP) {
+RcppExport SEXP _popr_build_kdtree_from_population(SEXP populationSEXP, SEXP max_leaf_sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,7 +42,7 @@ END_RCPP
 }
 // build_kdtree_from_pedigree
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pedigree(Rcpp::XPtr<Pedigree> pedigree, int max_leaf_size);
-RcppExport SEXP popr_build_kdtree_from_pedigree(SEXP pedigreeSEXP, SEXP max_leaf_sizeSEXP) {
+RcppExport SEXP _popr_build_kdtree_from_pedigree(SEXP pedigreeSEXP, SEXP max_leaf_sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +54,7 @@ END_RCPP
 }
 // build_kdtree_from_pids
 Rcpp::XPtr<SearchDataStructure> build_kdtree_from_pids(IntegerVector pids, Rcpp::XPtr<Population> population, int max_leaf_size, bool report_progress);
-RcppExport SEXP popr_build_kdtree_from_pids(SEXP pidsSEXP, SEXP populationSEXP, SEXP max_leaf_sizeSEXP, SEXP report_progressSEXP) {
+RcppExport SEXP _popr_build_kdtree_from_pids(SEXP pidsSEXP, SEXP populationSEXP, SEXP max_leaf_sizeSEXP, SEXP report_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -68,7 +68,7 @@ END_RCPP
 }
 // analyse_meioses_search_tree
 IntegerMatrix analyse_meioses_search_tree(Rcpp::XPtr<Population> population, Rcpp::XPtr<SearchDataStructure> search_tree, IntegerVector pids, NumericVector radii, bool report_progress);
-RcppExport SEXP popr_analyse_meioses_search_tree(SEXP populationSEXP, SEXP search_treeSEXP, SEXP pidsSEXP, SEXP radiiSEXP, SEXP report_progressSEXP) {
+RcppExport SEXP _popr_analyse_meioses_search_tree(SEXP populationSEXP, SEXP search_treeSEXP, SEXP pidsSEXP, SEXP radiiSEXP, SEXP report_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -83,7 +83,7 @@ END_RCPP
 }
 // get_pids_within_radius
 IntegerVector get_pids_within_radius(Rcpp::XPtr<Individual> ind, Rcpp::XPtr<SearchDataStructure> search_tree, double radius);
-RcppExport SEXP popr_get_pids_within_radius(SEXP indSEXP, SEXP search_treeSEXP, SEXP radiusSEXP) {
+RcppExport SEXP _popr_get_pids_within_radius(SEXP indSEXP, SEXP search_treeSEXP, SEXP radiusSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -96,7 +96,7 @@ END_RCPP
 }
 // radius_search_count
 IntegerMatrix radius_search_count(Rcpp::XPtr<Population> population, Rcpp::XPtr<SearchDataStructure> search_tree, IntegerVector pids, NumericVector radii, bool report_progress);
-RcppExport SEXP popr_radius_search_count(SEXP populationSEXP, SEXP search_treeSEXP, SEXP pidsSEXP, SEXP radiiSEXP, SEXP report_progressSEXP) {
+RcppExport SEXP _popr_radius_search_count(SEXP populationSEXP, SEXP search_treeSEXP, SEXP pidsSEXP, SEXP radiiSEXP, SEXP report_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -111,7 +111,7 @@ END_RCPP
 }
 // wipe_population
 void wipe_population(Rcpp::XPtr<Population> population);
-RcppExport SEXP popr_wipe_population(SEXP populationSEXP) {
+RcppExport SEXP _popr_wipe_population(SEXP populationSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Population> >::type population(populationSEXP);
@@ -121,7 +121,7 @@ END_RCPP
 }
 // load_individuals
 Rcpp::XPtr<Population> load_individuals(IntegerVector pid, LogicalVector is_male, IntegerVector pid_mom, IntegerVector pid_dad, LogicalVector is_alive, IntegerVector birth_year, NumericVector etrs89e, NumericVector etrs89n, bool progress, bool error_on_gender_mismatch);
-RcppExport SEXP popr_load_individuals(SEXP pidSEXP, SEXP is_maleSEXP, SEXP pid_momSEXP, SEXP pid_dadSEXP, SEXP is_aliveSEXP, SEXP birth_yearSEXP, SEXP etrs89eSEXP, SEXP etrs89nSEXP, SEXP progressSEXP, SEXP error_on_gender_mismatchSEXP) {
+RcppExport SEXP _popr_load_individuals(SEXP pidSEXP, SEXP is_maleSEXP, SEXP pid_momSEXP, SEXP pid_dadSEXP, SEXP is_aliveSEXP, SEXP birth_yearSEXP, SEXP etrs89eSEXP, SEXP etrs89nSEXP, SEXP progressSEXP, SEXP error_on_gender_mismatchSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -141,7 +141,7 @@ END_RCPP
 }
 // popr_test
 void popr_test();
-RcppExport SEXP popr_popr_test() {
+RcppExport SEXP _popr_popr_test() {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     popr_test();
@@ -150,7 +150,7 @@ END_RCPP
 }
 // pop_size
 int pop_size(Rcpp::XPtr<Population> population);
-RcppExport SEXP popr_pop_size(SEXP populationSEXP) {
+RcppExport SEXP _popr_pop_size(SEXP populationSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -161,7 +161,7 @@ END_RCPP
 }
 // get_number_of_children
 IntegerMatrix get_number_of_children(Rcpp::XPtr<Population> population, bool progress);
-RcppExport SEXP popr_get_number_of_children(SEXP populationSEXP, SEXP progressSEXP) {
+RcppExport SEXP _popr_get_number_of_children(SEXP populationSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -173,7 +173,7 @@ END_RCPP
 }
 // get_male_children_pids_birthyear
 List get_male_children_pids_birthyear(Rcpp::XPtr<Population> population, IntegerVector pids, IntegerMatrix pid_birthyear, bool progress);
-RcppExport SEXP popr_get_male_children_pids_birthyear(SEXP populationSEXP, SEXP pidsSEXP, SEXP pid_birthyearSEXP, SEXP progressSEXP) {
+RcppExport SEXP _popr_get_male_children_pids_birthyear(SEXP populationSEXP, SEXP pidsSEXP, SEXP pid_birthyearSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -187,7 +187,7 @@ END_RCPP
 }
 // pedigrees_count
 int pedigrees_count(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees);
-RcppExport SEXP popr_pedigrees_count(SEXP pedigreesSEXP) {
+RcppExport SEXP _popr_pedigrees_count(SEXP pedigreesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -198,7 +198,7 @@ END_RCPP
 }
 // pedigree_size
 int pedigree_size(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_pedigree_size(SEXP pedSEXP) {
+RcppExport SEXP _popr_pedigree_size(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -209,7 +209,7 @@ END_RCPP
 }
 // pedigrees_table
 std::unordered_map<int, int> pedigrees_table(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees);
-RcppExport SEXP popr_pedigrees_table(SEXP pedigreesSEXP) {
+RcppExport SEXP _popr_pedigrees_table(SEXP pedigreesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -220,7 +220,7 @@ END_RCPP
 }
 // get_pedigree
 Rcpp::XPtr<Pedigree> get_pedigree(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees, int index);
-RcppExport SEXP popr_get_pedigree(SEXP pedigreesSEXP, SEXP indexSEXP) {
+RcppExport SEXP _popr_get_pedigree(SEXP pedigreesSEXP, SEXP indexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -232,7 +232,7 @@ END_RCPP
 }
 // get_individual
 Rcpp::XPtr<Individual> get_individual(Rcpp::XPtr<Population> population, int pid);
-RcppExport SEXP popr_get_individual(SEXP populationSEXP, SEXP pidSEXP) {
+RcppExport SEXP _popr_get_individual(SEXP populationSEXP, SEXP pidSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -244,7 +244,7 @@ END_RCPP
 }
 // print_individual
 void print_individual(Rcpp::XPtr<Individual> individual);
-RcppExport SEXP popr_print_individual(SEXP individualSEXP) {
+RcppExport SEXP _popr_print_individual(SEXP individualSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Individual> >::type individual(individualSEXP);
@@ -252,9 +252,20 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// get_children_count
+int get_children_count(Rcpp::XPtr<Individual> individual);
+RcppExport SEXP _popr_get_children_count(SEXP individualSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Individual> >::type individual(individualSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_children_count(individual));
+    return rcpp_result_gen;
+END_RCPP
+}
 // print_pedigree
 void print_pedigree(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_print_pedigree(SEXP pedSEXP) {
+RcppExport SEXP _popr_print_pedigree(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
@@ -264,7 +275,7 @@ END_RCPP
 }
 // get_pids_in_pedigree
 IntegerVector get_pids_in_pedigree(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_get_pids_in_pedigree(SEXP pedSEXP) {
+RcppExport SEXP _popr_get_pids_in_pedigree(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -275,7 +286,7 @@ END_RCPP
 }
 // get_pids_in_pedigree_criteria
 IntegerVector get_pids_in_pedigree_criteria(Rcpp::XPtr<Pedigree> ped, bool must_be_alive, bool use_birth_year, int birth_year_min, int birth_year_max);
-RcppExport SEXP popr_get_pids_in_pedigree_criteria(SEXP pedSEXP, SEXP must_be_aliveSEXP, SEXP use_birth_yearSEXP, SEXP birth_year_minSEXP, SEXP birth_year_maxSEXP) {
+RcppExport SEXP _popr_get_pids_in_pedigree_criteria(SEXP pedSEXP, SEXP must_be_aliveSEXP, SEXP use_birth_yearSEXP, SEXP birth_year_minSEXP, SEXP birth_year_maxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -290,7 +301,7 @@ END_RCPP
 }
 // get_pedigree_edgelist
 CharacterMatrix get_pedigree_edgelist(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_get_pedigree_edgelist(SEXP pedSEXP) {
+RcppExport SEXP _popr_get_pedigree_edgelist(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -301,7 +312,7 @@ END_RCPP
 }
 // get_pedigree_as_graph
 List get_pedigree_as_graph(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_get_pedigree_as_graph(SEXP pedSEXP) {
+RcppExport SEXP _popr_get_pedigree_as_graph(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -312,7 +323,7 @@ END_RCPP
 }
 // meiosis_dist_tree
 int meiosis_dist_tree(Rcpp::XPtr<Individual> src, Rcpp::XPtr<Individual> dest);
-RcppExport SEXP popr_meiosis_dist_tree(SEXP srcSEXP, SEXP destSEXP) {
+RcppExport SEXP _popr_meiosis_dist_tree(SEXP srcSEXP, SEXP destSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -324,7 +335,7 @@ END_RCPP
 }
 // meiosis_dist_tree_matrix
 IntegerMatrix meiosis_dist_tree_matrix(Rcpp::XPtr<Pedigree> ped);
-RcppExport SEXP popr_meiosis_dist_tree_matrix(SEXP pedSEXP) {
+RcppExport SEXP _popr_meiosis_dist_tree_matrix(SEXP pedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -333,9 +344,45 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_individual_include_meioses_dist
+void set_individual_include_meioses_dist(Rcpp::XPtr<Population> population, IntegerVector pids, LogicalVector statuses);
+RcppExport SEXP _popr_set_individual_include_meioses_dist(SEXP populationSEXP, SEXP pidsSEXP, SEXP statusesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Population> >::type population(populationSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type pids(pidsSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type statuses(statusesSEXP);
+    set_individual_include_meioses_dist(population, pids, statuses);
+    return R_NilValue;
+END_RCPP
+}
+// get_individual_meioses_dist
+List get_individual_meioses_dist(Rcpp::XPtr<Individual> individual, NumericVector prob_not_mut);
+RcppExport SEXP _popr_get_individual_meioses_dist(SEXP individualSEXP, SEXP prob_not_mutSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Individual> >::type individual(individualSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type prob_not_mut(prob_not_mutSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_individual_meioses_dist(individual, prob_not_mut));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_individual_meioses_dist_ONLY_WEIGHTS
+NumericVector get_individual_meioses_dist_ONLY_WEIGHTS(Rcpp::XPtr<Individual> individual, NumericVector prob_not_mut);
+RcppExport SEXP _popr_get_individual_meioses_dist_ONLY_WEIGHTS(SEXP individualSEXP, SEXP prob_not_mutSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Individual> >::type individual(individualSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type prob_not_mut(prob_not_mutSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_individual_meioses_dist_ONLY_WEIGHTS(individual, prob_not_mut));
+    return rcpp_result_gen;
+END_RCPP
+}
 // get_pedigree_from_individual
 Rcpp::XPtr<Pedigree> get_pedigree_from_individual(Rcpp::XPtr<Individual> individual);
-RcppExport SEXP popr_get_pedigree_from_individual(SEXP individualSEXP) {
+RcppExport SEXP _popr_get_pedigree_from_individual(SEXP individualSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -346,7 +393,7 @@ END_RCPP
 }
 // get_pedigree_id_from_pid
 IntegerVector get_pedigree_id_from_pid(Rcpp::XPtr<Population> population, IntegerVector pids);
-RcppExport SEXP popr_get_pedigree_id_from_pid(SEXP populationSEXP, SEXP pidsSEXP) {
+RcppExport SEXP _popr_get_pedigree_id_from_pid(SEXP populationSEXP, SEXP pidsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -356,9 +403,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_pedigree_id_from_pedigree
+int get_pedigree_id_from_pedigree(Rcpp::XPtr<Pedigree> ped);
+RcppExport SEXP _popr_get_pedigree_id_from_pedigree(SEXP pedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_pedigree_id_from_pedigree(ped));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pedigree_populate_father_haplotypes
 void pedigree_populate_father_haplotypes(Rcpp::XPtr<Pedigree> ped, int loci, double mutation_rate);
-RcppExport SEXP popr_pedigree_populate_father_haplotypes(SEXP pedSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP) {
+RcppExport SEXP _popr_pedigree_populate_father_haplotypes(SEXP pedSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<Pedigree> >::type ped(pedSEXP);
@@ -370,7 +428,7 @@ END_RCPP
 }
 // pedigrees_all_populate_father_haplotypes
 void pedigrees_all_populate_father_haplotypes(Rcpp::XPtr< std::vector<Pedigree*> > pedigrees, int loci, double mutation_rate, bool progress);
-RcppExport SEXP popr_pedigrees_all_populate_father_haplotypes(SEXP pedigreesSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP, SEXP progressSEXP) {
+RcppExport SEXP _popr_pedigrees_all_populate_father_haplotypes(SEXP pedigreesSEXP, SEXP lociSEXP, SEXP mutation_rateSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr< std::vector<Pedigree*> > >::type pedigrees(pedigreesSEXP);
@@ -383,7 +441,7 @@ END_RCPP
 }
 // pedigree_get_father_haplotypes_pids
 List pedigree_get_father_haplotypes_pids(Rcpp::XPtr<Population> population, IntegerVector pids);
-RcppExport SEXP popr_pedigree_get_father_haplotypes_pids(SEXP populationSEXP, SEXP pidsSEXP) {
+RcppExport SEXP _popr_pedigree_get_father_haplotypes_pids(SEXP populationSEXP, SEXP pidsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -392,4 +450,50 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(pedigree_get_father_haplotypes_pids(population, pids));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_popr_wipe_pedigrees", (DL_FUNC) &_popr_wipe_pedigrees, 1},
+    {"_popr_build_pedigrees", (DL_FUNC) &_popr_build_pedigrees, 2},
+    {"_popr_build_kdtree_from_population", (DL_FUNC) &_popr_build_kdtree_from_population, 2},
+    {"_popr_build_kdtree_from_pedigree", (DL_FUNC) &_popr_build_kdtree_from_pedigree, 2},
+    {"_popr_build_kdtree_from_pids", (DL_FUNC) &_popr_build_kdtree_from_pids, 4},
+    {"_popr_analyse_meioses_search_tree", (DL_FUNC) &_popr_analyse_meioses_search_tree, 5},
+    {"_popr_get_pids_within_radius", (DL_FUNC) &_popr_get_pids_within_radius, 3},
+    {"_popr_radius_search_count", (DL_FUNC) &_popr_radius_search_count, 5},
+    {"_popr_wipe_population", (DL_FUNC) &_popr_wipe_population, 1},
+    {"_popr_load_individuals", (DL_FUNC) &_popr_load_individuals, 10},
+    {"_popr_popr_test", (DL_FUNC) &_popr_popr_test, 0},
+    {"_popr_pop_size", (DL_FUNC) &_popr_pop_size, 1},
+    {"_popr_get_number_of_children", (DL_FUNC) &_popr_get_number_of_children, 2},
+    {"_popr_get_male_children_pids_birthyear", (DL_FUNC) &_popr_get_male_children_pids_birthyear, 4},
+    {"_popr_pedigrees_count", (DL_FUNC) &_popr_pedigrees_count, 1},
+    {"_popr_pedigree_size", (DL_FUNC) &_popr_pedigree_size, 1},
+    {"_popr_pedigrees_table", (DL_FUNC) &_popr_pedigrees_table, 1},
+    {"_popr_get_pedigree", (DL_FUNC) &_popr_get_pedigree, 2},
+    {"_popr_get_individual", (DL_FUNC) &_popr_get_individual, 2},
+    {"_popr_print_individual", (DL_FUNC) &_popr_print_individual, 1},
+    {"_popr_get_children_count", (DL_FUNC) &_popr_get_children_count, 1},
+    {"_popr_print_pedigree", (DL_FUNC) &_popr_print_pedigree, 1},
+    {"_popr_get_pids_in_pedigree", (DL_FUNC) &_popr_get_pids_in_pedigree, 1},
+    {"_popr_get_pids_in_pedigree_criteria", (DL_FUNC) &_popr_get_pids_in_pedigree_criteria, 5},
+    {"_popr_get_pedigree_edgelist", (DL_FUNC) &_popr_get_pedigree_edgelist, 1},
+    {"_popr_get_pedigree_as_graph", (DL_FUNC) &_popr_get_pedigree_as_graph, 1},
+    {"_popr_meiosis_dist_tree", (DL_FUNC) &_popr_meiosis_dist_tree, 2},
+    {"_popr_meiosis_dist_tree_matrix", (DL_FUNC) &_popr_meiosis_dist_tree_matrix, 1},
+    {"_popr_set_individual_include_meioses_dist", (DL_FUNC) &_popr_set_individual_include_meioses_dist, 3},
+    {"_popr_get_individual_meioses_dist", (DL_FUNC) &_popr_get_individual_meioses_dist, 2},
+    {"_popr_get_individual_meioses_dist_ONLY_WEIGHTS", (DL_FUNC) &_popr_get_individual_meioses_dist_ONLY_WEIGHTS, 2},
+    {"_popr_get_pedigree_from_individual", (DL_FUNC) &_popr_get_pedigree_from_individual, 1},
+    {"_popr_get_pedigree_id_from_pid", (DL_FUNC) &_popr_get_pedigree_id_from_pid, 2},
+    {"_popr_get_pedigree_id_from_pedigree", (DL_FUNC) &_popr_get_pedigree_id_from_pedigree, 1},
+    {"_popr_pedigree_populate_father_haplotypes", (DL_FUNC) &_popr_pedigree_populate_father_haplotypes, 3},
+    {"_popr_pedigrees_all_populate_father_haplotypes", (DL_FUNC) &_popr_pedigrees_all_populate_father_haplotypes, 4},
+    {"_popr_pedigree_get_father_haplotypes_pids", (DL_FUNC) &_popr_pedigree_get_father_haplotypes_pids, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_popr(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

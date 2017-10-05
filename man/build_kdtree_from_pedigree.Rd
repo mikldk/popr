@@ -9,4 +9,3 @@ build_kdtree_from_pedigree(pedigree, max_leaf_size)
 \description{
 Build kd-tree with all individuals from pedigree
 }
-

@@ -9,4 +9,3 @@ get_number_of_children(population, progress = TRUE)
 \description{
 Get number of children for each individual in the population
 }
-

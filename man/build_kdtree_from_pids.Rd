@@ -4,9 +4,9 @@
 \alias{build_kdtree_from_pids}
 \title{Build kd-tree from a list of pids}
 \usage{
-build_kdtree_from_pids(pids, population, max_leaf_size)
+build_kdtree_from_pids(pids, population, max_leaf_size,
+  report_progress = FALSE)
 }
 \description{
 Build kd-tree from a list of pids
 }
-

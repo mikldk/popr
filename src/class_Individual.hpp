@@ -30,6 +30,9 @@ private:
   bool m_father_haplotype_mutated = false;
   void father_haplotype_mutate(double mutation_rate);
   
+  
+  bool m_include_meioses_dist = false;
+  
 public:
   Individual(int pid, bool is_male);
   ~Individual();
@@ -72,5 +75,8 @@ public:
   void set_father_haplotype(std::vector<int> h);
   std::vector<int> get_father_haplotype() const;
   void pass_haplotype_to_children(bool recursive, double mutation_rate);
+  
+  void set_include_meioses_dist(bool status);
+  bool get_include_meioses_dist() const;
 };
 

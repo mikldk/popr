@@ -9,4 +9,3 @@ pedigrees_count(pedigrees)
 \description{
 Get number of pedigrees
 }
-

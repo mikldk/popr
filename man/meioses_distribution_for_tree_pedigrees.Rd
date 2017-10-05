@@ -44,8 +44,8 @@ meioses_distribution_for_tree_pedigrees <- function(population, pids, radii, con
 }}
 \usage{
 meioses_distribution_for_tree_pedigrees(population, search_tree_unrelated,
-  max_leaf_size_pedigree = 10, pids, radii,
-  confirm_all_pedigrees_are_trees = FALSE)
+  max_leaf_size_pedigree = 10, pids, radii, pedigree_must_be_alive = FALSE,
+  pedigree_birth_year_range, confirm_all_pedigrees_are_trees = FALSE)
 }
 \arguments{
 \item{population}{A collection of individuals (\code{popr_population})}
@@ -57,6 +57,10 @@ meioses_distribution_for_tree_pedigrees(population, search_tree_unrelated,
 \item{pids}{Vector of pids to get meioses_distributions for (must be individuals in \code{population})}
 
 \item{radii}{Vector of radii (radiuses) to search within [km]}
+
+\item{pedigree_must_be_alive}{specifies if individuals in pedigree must be alive to be included (typically, you want \code{search_tree_unrelated} to have same value), if FALSE it is not check if individuals are alive or not (hence, it is ignored)}
+
+\item{pedigree_birth_year_range}{specifies valid birth year range, \code{c(xmin, xmax)}, such that only individuals in pedigree with \code{xmin <= birth_year <= xmax} are included (typically, you want \code{search_tree_unrelated} to have same value)}
 
 \item{confirm_all_pedigrees_are_trees}{Set to TRUE to confirm that all pedigrees are tree (this is the caller's responsibility to ensure that as it would be too time consuming to check this requirement in this function)}
 }
@@ -76,4 +80,3 @@ the number of meioses are found.
 
 Pedigree information is linked to the individuals in the population. All pedigrees must be trees (FIXME).
 }
-

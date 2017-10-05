@@ -32,4 +32,3 @@ the number of meioses are found.
 \details{
 Pedigree information is linked to the individuals in the population.
 }
-
