@@ -120,8 +120,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // load_individuals
-Rcpp::XPtr<Population> load_individuals(IntegerVector pid, LogicalVector is_male, IntegerVector pid_mom, IntegerVector pid_dad, LogicalVector is_alive, IntegerVector birth_year, NumericVector etrs89e, NumericVector etrs89n, bool progress, bool error_on_gender_mismatch);
-RcppExport SEXP _popr_load_individuals(SEXP pidSEXP, SEXP is_maleSEXP, SEXP pid_momSEXP, SEXP pid_dadSEXP, SEXP is_aliveSEXP, SEXP birth_yearSEXP, SEXP etrs89eSEXP, SEXP etrs89nSEXP, SEXP progressSEXP, SEXP error_on_gender_mismatchSEXP) {
+Rcpp::XPtr<Population> load_individuals(IntegerVector pid, LogicalVector is_male, IntegerVector pid_mom, IntegerVector pid_dad, LogicalVector is_alive, IntegerVector birth_year, NumericVector etrs89e, NumericVector etrs89n, bool progress, bool error_on_gender_mismatch, bool error_on_pid_not_found);
+RcppExport SEXP _popr_load_individuals(SEXP pidSEXP, SEXP is_maleSEXP, SEXP pid_momSEXP, SEXP pid_dadSEXP, SEXP is_aliveSEXP, SEXP birth_yearSEXP, SEXP etrs89eSEXP, SEXP etrs89nSEXP, SEXP progressSEXP, SEXP error_on_gender_mismatchSEXP, SEXP error_on_pid_not_foundSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -135,7 +135,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type etrs89n(etrs89nSEXP);
     Rcpp::traits::input_parameter< bool >::type progress(progressSEXP);
     Rcpp::traits::input_parameter< bool >::type error_on_gender_mismatch(error_on_gender_mismatchSEXP);
-    rcpp_result_gen = Rcpp::wrap(load_individuals(pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch));
+    Rcpp::traits::input_parameter< bool >::type error_on_pid_not_found(error_on_pid_not_foundSEXP);
+    rcpp_result_gen = Rcpp::wrap(load_individuals(pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch, error_on_pid_not_found));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -462,7 +463,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_popr_get_pids_within_radius", (DL_FUNC) &_popr_get_pids_within_radius, 3},
     {"_popr_radius_search_count", (DL_FUNC) &_popr_radius_search_count, 5},
     {"_popr_wipe_population", (DL_FUNC) &_popr_wipe_population, 1},
-    {"_popr_load_individuals", (DL_FUNC) &_popr_load_individuals, 10},
+    {"_popr_load_individuals", (DL_FUNC) &_popr_load_individuals, 11},
     {"_popr_popr_test", (DL_FUNC) &_popr_popr_test, 0},
     {"_popr_pop_size", (DL_FUNC) &_popr_pop_size, 1},
     {"_popr_get_number_of_children", (DL_FUNC) &_popr_get_number_of_children, 2},

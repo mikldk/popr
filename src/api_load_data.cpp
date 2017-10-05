@@ -31,7 +31,8 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
                                         NumericVector etrs89e = NumericVector::create(), 
                                         NumericVector etrs89n = NumericVector::create(),
                                         bool progress = true, 
-                                        bool error_on_gender_mismatch = true) {
+                                        bool error_on_gender_mismatch = true, 
+                                        bool error_on_pid_not_found = true) {
   std::unordered_map<int, Individual*>* pop = new std::unordered_map<int, Individual*>(); // pid's are garanteed to be unique
 
   Population* population = new Population(pop);
@@ -91,6 +92,10 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
   
   // Fill out parents
   for (int k = 0; k < N; ++k) {
+    //if (lim_parents_children != -1 && k > lim_parents_children) {
+    //  break;
+    //}
+    
     int i_pid = pid[k];
     int i_pid_mom = pid_mom[k];
     int i_pid_dad = pid_dad[k];
@@ -104,7 +109,12 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
       if (m == pop->end()) {
         std::ostringstream err;
         err << "NOT FOUND: pid_mom = " << i_pid_mom << " for pid = " << i_pid << " was not found as a pid itself!";
-        stop(err.str());
+        
+        if (error_on_pid_not_found) {
+          stop(err.str());
+        } else {
+          warning(err.str());
+        }
       } else {
         if (m->second->get_is_male()) {
           std::ostringstream err;
@@ -128,7 +138,12 @@ Rcpp::XPtr<Population> load_individuals(IntegerVector pid,
       if (f == pop->end()) {
         std::ostringstream err;
         err << "NOT FOUND: pid_dad = " << i_pid_dad << " for pid = " << i_pid << " was not found as a pid itself!";
-        stop(err.str());
+        
+        if (error_on_pid_not_found) {
+          stop(err.str());
+        } else {
+          warning(err.str());
+        }
       } else {
         if (!(f->second->get_is_male())) {
           std::ostringstream err;

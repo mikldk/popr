@@ -7,7 +7,7 @@
 load_individuals(pid, is_male, pid_mom, pid_dad, is_alive = as.logical(c()),
   birth_year = as.integer(c()), etrs89e = as.numeric(c()),
   etrs89n = as.numeric(c()), progress = TRUE,
-  error_on_gender_mismatch = TRUE)
+  error_on_gender_mismatch = TRUE, error_on_pid_not_found = TRUE)
 }
 \description{
 Construct a population

@@ -52,8 +52,8 @@ wipe_population <- function(population) {
 #' Construct a population
 #' 
 #' @export
-load_individuals <- function(pid, is_male, pid_mom, pid_dad, is_alive = as.logical( c()), birth_year = as.integer( c()), etrs89e = as.numeric( c()), etrs89n = as.numeric( c()), progress = TRUE, error_on_gender_mismatch = TRUE) {
-    .Call('_popr_load_individuals', PACKAGE = 'popr', pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch)
+load_individuals <- function(pid, is_male, pid_mom, pid_dad, is_alive = as.logical( c()), birth_year = as.integer( c()), etrs89e = as.numeric( c()), etrs89n = as.numeric( c()), progress = TRUE, error_on_gender_mismatch = TRUE, error_on_pid_not_found = TRUE) {
+    .Call('_popr_load_individuals', PACKAGE = 'popr', pid, is_male, pid_mom, pid_dad, is_alive, birth_year, etrs89e, etrs89n, progress, error_on_gender_mismatch, error_on_pid_not_found)
 }
 
 popr_test <- function() {
